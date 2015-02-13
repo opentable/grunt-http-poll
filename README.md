@@ -3,7 +3,7 @@
 
 Poll a http endpoint until you see the desired statuscode.
 
-In our case we use it to keep polling until the server goes down.
+In our case we use it after issuing the stop command to keep polling until we see the server has stopped.
 
 installation:
 
