@@ -13,15 +13,29 @@ module.exports = function(grunt) {
             }
         },
         'http-poll': {
-            'myserver': {
+            'server': {
                 options: {
                     endpoint: 'http://127.0.0.1:8888/503after3attempts',
                     statuscode: 503
                 }
             },
-            'mybadserver': {
+            'otherserver': {
+                options: {
+                    endpoint: 'http://127.0.0.1:8888/503after3attempts',
+                    statuscode: 503
+                }
+            },
+            'badserver': {
                 options: {
                     endpoint: 'http://127.0.0.1:8888',
+                    statuscode: 200,
+                    timeout: 3000,
+                    timeoutIsError: false
+                }
+            },
+            'otherbadserver': {
+                options: {
+                    endpoint: 'http://127.0.0.1:8000',
                     statuscode: 200,
                     timeout: 3000,
                     timeoutIsError: false

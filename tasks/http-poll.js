@@ -1,7 +1,6 @@
 module.exports = function(grunt){
     var request = require('request'),
         async = require('async'),
-        timeout = false,
         finished = false;
 
     var execute = function(options, done){
@@ -32,15 +31,17 @@ module.exports = function(grunt){
 
     grunt.registerMultiTask('http-poll', function(){
         var done = this.async();
+        var timeout = false;
         var options = this.options({
             pollinterval: 1000,
             timeout: 10000,
             timeoutIsError: true
         });
+        finished = false;
 
         grunt.verbose.writeflags(options);
 
-        setTimeout(function(){
+        var globalTimeout = setTimeout(function(){
           timeout = true;
         }, options.timeout);
 
@@ -51,12 +52,10 @@ module.exports = function(grunt){
             setTimeout(cb, options.pollinterval);
           });
         }, function(err){
+          clearTimeout(globalTimeout);
           if(!finished && options.timeoutIsError){
             err = new Error("timeout elapsed before seeing statuscode: " + options.statuscode);
           }
-
-          timeout = false;
-          finished = false;
 
           done(err);
         });
