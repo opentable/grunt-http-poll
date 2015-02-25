@@ -1,6 +1,6 @@
 {
   "name": "grunt-http-poll",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "poll a http endpoint until the desired statuscode is seen",
   "main": "Gruntfile.js",
   "directories": {
